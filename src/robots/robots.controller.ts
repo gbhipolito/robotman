@@ -46,10 +46,13 @@ export class RobotsController {
     }
 
     @Delete(':id')
-    async remove(@Param('id') id: number): Promise<string> {
+    async remove(@Param('id') id: number): Promise<object> { // TODO delete response interface
         await this.robotsService.delete(id);
 
-        return 'deleted';
+        return {
+            id,
+            message: 'deleted'
+        };
     }
 
 }
