@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { UpdateRobotDto } from './dto/update-robot.dto';
@@ -11,12 +11,12 @@ export class RobotsController {
 
     @Get()
     async findAll(@Query() query: ListBotsQuery): Promise<Robot[]> {
-        return this.robotsService.findAll(query);
+        return await this.robotsService.findAll(query);
     }
 
     @Get(':id')
-    async findOne(@Param('id') id: string): Promise<string> { // TODO change to Promise<Robot>
-        return `Got one! ${id}`;
+    async findOne(@Param('id') id: number): Promise<Robot> {
+        return await this.robotsService.findOne(id);
     }
 
     @Post()
@@ -29,16 +29,27 @@ export class RobotsController {
             avatar: createRobotDto.avatar || 'default', // TODO https://avatars.dicebear.com/
         };
 
-        return this.robotsService.create(robot);
+        return await this.robotsService.create(robot);
     }
 
-    async update(@Param('id') id: string, @Body() updateRobotDto: UpdateRobotDto): Promise<string> { // TODO change to Promise<Robot>
-        return `Updates ${id} robot`;
+    @Patch(':id')
+    async update(@Param('id') id: number, @Body() updateRobotDto: UpdateRobotDto): Promise<Robot> {
+        // TODO params validation
+        
+        const robot: Robot = {
+            name: updateRobotDto.name,
+            purpose: updateRobotDto.purpose,
+            avatar: updateRobotDto.avatar || 'default', // TODO https://avatars.dicebear.com/
+        };
+
+        return await this.robotsService.update(id, robot);
     }
 
     @Delete(':id')
-    async remove(@Param('id') id: string): Promise<string> { // TODO change to Promise<void>
-        return `Will delete ${id}`;
+    async remove(@Param('id') id: number): Promise<string> {
+        await this.robotsService.delete(id);
+
+        return 'deleted';
     }
 
 }
