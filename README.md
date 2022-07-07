@@ -24,13 +24,13 @@ http://localhost:3000
     "id": 1,
     "name": "rambot",
     "purpose": "beng beng beng",
-    "avatar": "default"
+    "avatar": "https://avatars.dicebear.com/api/bottts/1e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
   },
   {
     "id": 3,
     "name": "rambotan",
     "purpose": "beng beng beng din",
-    "avatar": "iba"
+    "avatar": "https://avatars.dicebear.com/api/bottts/120a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
   }
 ]
 ```
@@ -44,7 +44,7 @@ http://localhost:3000
     "id": 1,
     "name": "rambot",
     "purpose": "beng beng beng",
-    "avatar": "default"
+    "avatar": "https://avatars.dicebear.com/api/bottts/3e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
 }
 ```
 
@@ -65,7 +65,7 @@ http://localhost:3000
 {
     "name": "rambotan2",
     "purpose": "beng beng beng din",
-    "avatar": "default",
+    "avatar": "https://avatars.dicebear.com/api/bottts/4e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg",
     "id": 4
 }
 ```
@@ -77,14 +77,14 @@ http://localhost:3000
 #### Sample Request
 ```json
 {
-    "avatar": "iba2"
+    "avatar": "https://avatars.dicebear.com/api/bottts/5e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
 }
 ```
 
 #### Sample Response
 ```json
 {
-    "avatar": "iba2"
+    "avatar": "https://avatars.dicebear.com/api/bottts/6e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
 }
 ```
 

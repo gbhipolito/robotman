@@ -23,10 +23,10 @@ export class RobotsController {
     async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
         // TODO params validation
         
-        const robot: Robot = {
+        const robot: Robot = { // can be factored out?
             name: createRobotDto.name,
             purpose: createRobotDto.purpose,
-            avatar: createRobotDto.avatar || 'default', // TODO https://avatars.dicebear.com/
+            avatar: createRobotDto.avatar,
         };
 
         return await this.robotsService.create(robot);
@@ -39,7 +39,7 @@ export class RobotsController {
         const robot: Robot = {
             name: updateRobotDto.name,
             purpose: updateRobotDto.purpose,
-            avatar: updateRobotDto.avatar || 'default', // TODO https://avatars.dicebear.com/
+            avatar: updateRobotDto.avatar,
         };
 
         return await this.robotsService.update(id, robot);

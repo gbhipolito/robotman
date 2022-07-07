@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AvatarService } from 'src/avatar/avatar.service';
 import { Repository } from 'typeorm';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { Robot } from './interfaces/robot.interface';
@@ -10,6 +11,7 @@ export class RobotsService {
     constructor(
         @InjectRepository(RobotEntity)
         private robotsRepository: Repository<RobotEntity>,
+        private avatarService: AvatarService,
     ) {}
 
     async findAll(query: ListBotsQuery): Promise<Robot[]> {
@@ -24,6 +26,10 @@ export class RobotsService {
 
     async create(robot: Robot): Promise<Robot> {
         try {
+            if (!robot.avatar) {
+                robot.avatar = this.avatarService.getRandom();
+            }
+
             await this.robotsRepository.insert(robot);
 
             // repo insert seems to also mutate the input robot
