@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
@@ -8,55 +18,59 @@ import { RobotsService } from './robots.service';
 
 @Controller('robots')
 export class RobotsController {
-    constructor(private robotsService: RobotsService) {}
+  constructor(private robotsService: RobotsService) {}
 
-    @Get()
-    async findAll(@Query() query: ListBotsQuery): Promise<Robot[]> {
-        return await this.robotsService.findAll(query);
-    }
+  @Get()
+  async findAll(@Query() query: ListBotsQuery): Promise<Robot[]> {
+    return await this.robotsService.findAll(query);
+  }
 
-    @Get(':id')
-    async findOne(@Param('id') id: number): Promise<Robot> {
-        return await this.robotsService.findOne(id);
-    }
+  @Get(':id')
+  async findOne(@Param('id') id: number): Promise<Robot> {
+    return await this.robotsService.findOne(id);
+  }
 
-    @Post()
-    @UseGuards(AuthGuard('basic'))
-    async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
-        // TODO params validation
-        
-        const robot: Robot = { // can be factored out?
-            name: createRobotDto.name,
-            purpose: createRobotDto.purpose,
-            avatar: createRobotDto.avatar,
-        };
+  @Post()
+  @UseGuards(AuthGuard('basic'))
+  async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
+    // TODO params validation
 
-        return await this.robotsService.create(robot);
-    }
+    const robot: Robot = {
+      // can be factored out?
+      name: createRobotDto.name,
+      purpose: createRobotDto.purpose,
+      avatar: createRobotDto.avatar,
+    };
 
-    @Patch(':id')
-    @UseGuards(AuthGuard('basic'))
-    async update(@Param('id') id: number, @Body() updateRobotDto: UpdateRobotDto): Promise<Robot> {
-        // TODO params validation
-        
-        const robot: Robot = {
-            name: updateRobotDto.name,
-            purpose: updateRobotDto.purpose,
-            avatar: updateRobotDto.avatar,
-        };
+    return await this.robotsService.create(robot);
+  }
 
-        return await this.robotsService.update(id, robot);
-    }
+  @Patch(':id')
+  @UseGuards(AuthGuard('basic'))
+  async update(
+    @Param('id') id: number,
+    @Body() updateRobotDto: UpdateRobotDto,
+  ): Promise<Robot> {
+    // TODO params validation
 
-    @Delete(':id')
-    @UseGuards(AuthGuard('basic'))
-    async remove(@Param('id') id: number): Promise<object> { // TODO delete response interface
-        await this.robotsService.delete(id);
+    const robot: Robot = {
+      name: updateRobotDto.name,
+      purpose: updateRobotDto.purpose,
+      avatar: updateRobotDto.avatar,
+    };
 
-        return {
-            id,
-            message: 'deleted'
-        };
-    }
+    return await this.robotsService.update(id, robot);
+  }
 
+  @Delete(':id')
+  @UseGuards(AuthGuard('basic'))
+  async remove(@Param('id') id: number): Promise<object> {
+    // TODO delete response interface
+    await this.robotsService.delete(id);
+
+    return {
+      id,
+      message: 'deleted',
+    };
+  }
 }

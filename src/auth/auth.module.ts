@@ -3,7 +3,7 @@ import { PassportModule } from '@nestjs/passport';
 import { BasicStrategy } from './auth-basic.strategy';
 
 @Module({
-    imports: [PassportModule],
-    providers: [BasicStrategy],
+  imports: [PassportModule],
+  providers: [BasicStrategy],
 })
 export class AuthModule {}
