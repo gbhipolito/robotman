@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AvatarService } from 'src/avatar/avatar.service';
 import { Repository } from 'typeorm';
@@ -36,7 +36,7 @@ export class RobotsService {
         } catch (error) {
             console.error('Failed to insert', error);
 
-            throw error;
+            throw new BadRequestException(error.message);
         }
         
         return robot;
@@ -48,7 +48,7 @@ export class RobotsService {
         } catch (error) {
             console.error('Failed to update', error);
 
-            throw error;
+            throw new BadRequestException(error.message);
         }
         
         return robot;
@@ -60,7 +60,7 @@ export class RobotsService {
         } catch (error) {
             console.error('Failed to delete', error);
 
-            throw error;
+            throw new BadRequestException(error.message);
         }
     }
 }

@@ -52,6 +52,9 @@ http://localhost:3000
 #### Endpoint
 `POST /robots`
 
+#### Auth
+Basic auth. username: `man`. password: `robot`.
+
 #### Sample Request
 ```json
 {
@@ -74,6 +77,9 @@ http://localhost:3000
 #### Endpoint
 `PATCH /robots/:id`
 
+#### Auth
+Basic auth. username: `man`. password: `robot`.
+
 #### Sample Request
 ```json
 {
@@ -92,6 +98,9 @@ http://localhost:3000
 ### Delete
 #### Endpoint
 `DELETE /robots/:id`
+
+#### Auth
+Basic auth. username: `man`. password: `robot`.
 
 #### Sample Response
 ```

@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { UpdateRobotDto } from './dto/update-robot.dto';
@@ -20,6 +21,7 @@ export class RobotsController {
     }
 
     @Post()
+    @UseGuards(AuthGuard('basic'))
     async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
         // TODO params validation
         
@@ -33,6 +35,7 @@ export class RobotsController {
     }
 
     @Patch(':id')
+    @UseGuards(AuthGuard('basic'))
     async update(@Param('id') id: number, @Body() updateRobotDto: UpdateRobotDto): Promise<Robot> {
         // TODO params validation
         
@@ -46,6 +49,7 @@ export class RobotsController {
     }
 
     @Delete(':id')
+    @UseGuards(AuthGuard('basic'))
     async remove(@Param('id') id: number): Promise<object> { // TODO delete response interface
         await this.robotsService.delete(id);
 
