@@ -29,8 +29,8 @@ Public
 #### Sample Response
 ```json
 {
-    "username": "ako3",
-    "email": "ako3@ito.com",
+    "username": "ako",
+    "email": "ako@ito.com",
     "firstName": "ako",
     "lastName": "ito",
     "id": 1
