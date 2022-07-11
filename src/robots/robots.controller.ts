@@ -9,7 +9,8 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { BasicAuthGuard } from 'src/auth/basic-auth.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { UpdateRobotDto } from './dto/update-robot.dto';
@@ -31,7 +32,7 @@ export class RobotsController {
   }
 
   @Post()
-  @UseGuards(AuthGuard('basic'))
+  @UseGuards(JwtAuthGuard)
   async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
     // TODO params validation
 
@@ -46,7 +47,7 @@ export class RobotsController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard('basic'))
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: number,
     @Body() updateRobotDto: UpdateRobotDto,
@@ -63,7 +64,7 @@ export class RobotsController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard('basic'))
+  @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: number): Promise<object> {
     // TODO delete response interface
     await this.robotsService.delete(id);

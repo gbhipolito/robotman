@@ -1,4 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { UserEntity } from 'src/users/user.entity';
+import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('robot')
 export class RobotEntity {
@@ -14,4 +15,7 @@ export class RobotEntity {
 
   @Column({ nullable: true })
   avatar?: string;
+
+  @ManyToOne(_type => UserEntity, user => user.robots)
+  user: UserEntity;
 }

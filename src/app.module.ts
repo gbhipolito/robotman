@@ -5,9 +5,10 @@ import { RobotsModule } from './robots/robots.module';
 import { MysqlTypeOrmModule } from './db';
 import { UtilsModule } from './utils/utils.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [RobotsModule, MysqlTypeOrmModule, UtilsModule, AuthModule],
+  imports: [RobotsModule, MysqlTypeOrmModule, UtilsModule, AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
