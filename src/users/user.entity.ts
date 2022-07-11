@@ -1,5 +1,11 @@
 import { RobotEntity } from 'src/robots/robot.entity';
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('user')
 export class UserEntity {
@@ -7,22 +13,22 @@ export class UserEntity {
   id: number;
 
   @Index({ unique: true })
-  @Column({length: 50})
+  @Column({ length: 50 })
   username: string;
 
   @Index({ unique: true })
-  @Column({length: 250})
+  @Column({ length: 250 })
   email: string;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   firstName: string;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   lastName: string;
 
   @Column()
   password: string; // TODO move to UserCred entity
 
-  @OneToMany(_type => RobotEntity, robot => robot.user)
+  @OneToMany((_type) => RobotEntity, (robot) => robot.user)
   robots: RobotEntity[];
 }
