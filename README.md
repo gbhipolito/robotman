@@ -1,5 +1,5 @@
 # Robotman
-App showcasing NestJS w/ TypeORM.
+App showcasing NestJS w/ TypeORM. Also includes different passport strategies.
 
 
 ## API Doc
@@ -7,9 +7,67 @@ App showcasing NestJS w/ TypeORM.
 ### Base URL
 http://localhost:3000
 
+
+### Create User
+#### Endpoint
+`POST /users`
+
+#### Auth
+Public
+
+#### Sample Request
+```json
+{
+    "username": "ako",
+    "email": "ako@ito.com",
+    "firstName": "ako",
+    "lastName": "ito",
+    "password": "Akop@d1n"
+}
+```
+
+#### Sample Response
+```json
+{
+    "username": "ako3",
+    "email": "ako3@ito.com",
+    "firstName": "ako",
+    "lastName": "ito",
+    "id": 1
+}
+```
+
+
+### Login
+#### Endpoint
+`POST /auth/login`
+
+#### Auth
+Public
+
+#### Sample Request
+```json
+{
+    "username": "ako",
+    "password": "Akop@d1n"
+}
+```
+
+#### Sample Response
+```json
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFrbzMiLCJzdWIiOjQsImlhdCI6MTY1NzUwNjEyMCwiZXhwIjoxNjU3NTA2MjQwfQ.p2JAl24y-7xJzySYLX5vZY1ZOzVoH9UL4eAr0ri1Gmo"
+    // use this as Bearer token on protected endpoints
+}
+```
+
+
 ### Find All
 #### Endpoint
 `GET /robots`
+
+#### Auth
+Public
 
 #### Query Params
 |name| description |
@@ -24,19 +82,38 @@ http://localhost:3000
     "id": 1,
     "name": "rambot",
     "purpose": "beng beng beng",
-    "avatar": "https://avatars.dicebear.com/api/bottts/1e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
+    "avatar": "https://avatars.dicebear.com/api/bottts/1e0a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg",
+    "user": {
+		  "id": 4,
+		  "username": "ako3",
+		  "email": "ako3@ito.com",
+		  "firstName": "ako",
+		  "lastName": "ito",
+		  "password": "ssHas7cdWqzhvnpBcaCdqI3QPST8AAW1gkepV1iES6E="
+	}
   },
   {
     "id": 3,
     "name": "rambotan",
     "purpose": "beng beng beng din",
-    "avatar": "https://avatars.dicebear.com/api/bottts/120a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg"
+    "avatar": "https://avatars.dicebear.com/api/bottts/120a1c25-79f3-483d-9eaa-cdd1ce35acf7.svg",
+    "user": {
+		  "id": 4,
+		  "username": "ako3",
+		  "email": "ako3@ito.com",
+		  "firstName": "ako",
+		  "lastName": "ito",
+		  "password": "ssHas7cdWqzhvnpBcaCdqI3QPST8AAW1gkepV1iES6E="
+	}
   }
 ]
 ```
 
 ### Find One
 `GET /robots/:id`
+
+#### Auth
+Public
 
 #### Sample Response
 ```json
@@ -53,7 +130,7 @@ http://localhost:3000
 `POST /robots`
 
 #### Auth
-Basic auth. username: `man`. password: `robot`.
+Must be logged in. Use token from login as Bearer token.
 
 #### Sample Request
 ```json
@@ -78,7 +155,7 @@ Basic auth. username: `man`. password: `robot`.
 `PATCH /robots/:id`
 
 #### Auth
-Basic auth. username: `man`. password: `robot`.
+Must be logged in. Use token from login as Bearer token.
 
 #### Sample Request
 ```json
@@ -100,7 +177,7 @@ Basic auth. username: `man`. password: `robot`.
 `DELETE /robots/:id`
 
 #### Auth
-Basic auth. username: `man`. password: `robot`.
+Must be logged in. Use token from login as Bearer token.
 
 #### Sample Response
 ```
