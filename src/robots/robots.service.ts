@@ -20,6 +20,7 @@ export class RobotsService {
     return await this.robotsRepository.find({
       skip: query.skip || 0,
       take: query.limit || 10,
+      relations: ['user'], // TODO exclude user password
     });
   }
 

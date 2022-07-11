@@ -7,9 +7,9 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
-import { BasicAuthGuard } from 'src/auth/basic-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
@@ -33,7 +33,7 @@ export class RobotsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async create(@Body() createRobotDto: CreateRobotDto): Promise<Robot> {
+  async create(@Req() req, @Body() createRobotDto: CreateRobotDto): Promise<Robot> {
     // TODO params validation
 
     const robot: Robot = {
@@ -41,6 +41,7 @@ export class RobotsController {
       name: createRobotDto.name,
       purpose: createRobotDto.purpose,
       avatar: createRobotDto.avatar,
+      userId: req.user.id,
     };
 
     return await this.robotsService.create(robot);

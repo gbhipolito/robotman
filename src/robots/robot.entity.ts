@@ -22,6 +22,9 @@ export class RobotEntity {
   @Column({ nullable: true })
   avatar?: string;
 
+  @Column()
+  userId?: number;
+
   @ManyToOne((_type) => UserEntity, (user) => user.robots)
   user: UserEntity;
 }
