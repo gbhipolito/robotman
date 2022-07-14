@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -20,9 +20,13 @@ export class AuthService {
       throw error;
     }
 
-    const hashedPass = crypto.createHash('sha256').update(pass).digest('base64'); // TODO use argon2
+    const hashedPass = crypto
+      .createHash('sha256')
+      .update(pass)
+      .digest('base64'); // TODO use argon2
 
-    if (user?.password === hashedPass) { // TODO use safe-compare
+    if (user?.password === hashedPass) {
+      // TODO use safe-compare
       const { password, ...result } = user; // strip password property
 
       return result;

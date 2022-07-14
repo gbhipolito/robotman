@@ -10,7 +10,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateRobotDto } from './dto/create-robot.dto';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { UpdateRobotDto } from './dto/update-robot.dto';
@@ -22,7 +22,7 @@ export class RobotsController {
   constructor(private robotsService: RobotsService) {}
 
   @Get()
-  async findAll(@Query() query: ListBotsQuery): Promise<Robot[]> {
+  async findAll(@Query() query?: ListBotsQuery): Promise<Robot[]> {
     return await this.robotsService.findAll(query);
   }
 
@@ -33,7 +33,10 @@ export class RobotsController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  async create(@Req() req, @Body() createRobotDto: CreateRobotDto): Promise<Robot> {
+  async create(
+    @Req() req,
+    @Body() createRobotDto: CreateRobotDto,
+  ): Promise<Robot> {
     // TODO params validation
 
     const robot: Robot = {

@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AvatarService } from 'src/avatar/avatar.service';
+import { AvatarService } from '../avatar/avatar.service';
 import { Repository } from 'typeorm';
 import { ListBotsQuery } from './dto/list-bots-query';
 import { Robot } from './interfaces/robot.interface';

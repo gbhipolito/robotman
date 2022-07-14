@@ -1,4 +1,4 @@
-import { RobotEntity } from 'src/robots/robot.entity';
+import { RobotEntity } from '../robots/robot.entity';
 import {
   Column,
   Entity,
@@ -30,5 +30,5 @@ export class UserEntity {
   password: string; // TODO move to UserCred entity
 
   @OneToMany((_type) => RobotEntity, (robot) => robot.user)
-  robots: RobotEntity[];
+  robots?: RobotEntity[];
 }

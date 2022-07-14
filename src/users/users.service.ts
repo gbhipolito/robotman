@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './interfaces/user.interface';
 import { UserEntity } from './user.entity';
-import * as crypto from "crypto";
+import * as crypto from 'crypto';
 
 @Injectable()
 export class UsersService {
@@ -24,7 +24,10 @@ export class UsersService {
 
   async create(user: User): Promise<User> {
     try {
-      user.password = crypto.createHash('sha256').update(user.password).digest('base64'); // TODO use argon2
+      user.password = crypto
+        .createHash('sha256')
+        .update(user.password)
+        .digest('base64'); // TODO use argon2
 
       await this.usersRepository.insert(user);
 
@@ -35,8 +38,8 @@ export class UsersService {
       throw new BadRequestException(error.message);
     }
 
-    const {password, ...result} = user;
-    
+    const { password, ...result } = user;
+
     return result;
   }
 }
