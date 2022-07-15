@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as crypto from 'crypto';
@@ -18,6 +18,10 @@ export class AuthService {
       console.error(error);
 
       throw error;
+    }
+
+    if (!user) {
+      throw new NotFoundException(`${username} not found`);
     }
 
     const hashedPass = crypto

@@ -22,7 +22,7 @@ export class RobotsController {
   constructor(private robotsService: RobotsService) {}
 
   @Get()
-  async findAll(@Query() query?: ListBotsQuery): Promise<Robot[]> {
+  async findAll(@Query() query: ListBotsQuery = {}): Promise<Robot[]> {
     return await this.robotsService.findAll(query);
   }
 

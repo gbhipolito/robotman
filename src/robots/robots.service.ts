@@ -14,7 +14,7 @@ export class RobotsService {
     private avatarService: AvatarService,
   ) {}
 
-  async findAll(query: ListBotsQuery): Promise<Robot[]> {
+  async findAll(query: ListBotsQuery = {}): Promise<Robot[]> {
     console.log(query);
 
     return await this.robotsRepository.find({
